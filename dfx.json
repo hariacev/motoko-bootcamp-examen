@@ -1,0 +1,25 @@
+{
+  "canisters": {
+    "practica1_backend": {
+      "main": "src/practica1_backend/main.mo",
+      "type": "motoko"
+    },
+    "practica1_frontend": {
+      "dependencies": [
+        "practica1_backend"
+      ],
+      "source": [
+        "src/practica1_frontend/assets"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
