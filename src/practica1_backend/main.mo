@@ -1,3 +1,36 @@
+import Principal "mo:base/Principal";
+
+actor {
+  stable var name : Text = "";
+  type User = (Text, Nat);
+
+  var users : [User] = [
+    ("Adrián", 36),
+    ("Manuel", 45),
+  ];
+
+  public shared func setName(newName : Text) : async () {
+    name := newName;
+  };
+
+  public query func getName() : async Text {
+    return name;
+  };
+
+  public shared query ({ caller }) func whoAmI() : async Principal {
+    return caller;
+  }; // El caller está destructurado, es del objeto msg. Con msg y msg.caller funciona.
+
+  public shared query ({ caller }) func getUsers() : async [User] {
+    if (Principal.isAnonymous(caller)) {
+      return [("No usuarios", 0)];
+    };
+    return users;
+  }
+
+};
+
+/*
 import Nat "mo:base/Nat";
 import Text "mo:base/Text";
 
@@ -31,12 +64,7 @@ actor {
     return usuario;
   };
 
-  /*public query func setUsuario(nuevoUsuario : Usuario) : async () {
-    //Array.append<Usuario>(usuario, [nuevoUsuario]);
-    usuario.append(nuevoUsuario);
-  };*/
 
-  //var arreglo : Nat = 0;
   public shared func setUsuario(usuarioNuevo : [Usuario]) : async () {
     usuario := usuarioNuevo;
   };
@@ -49,3 +77,4 @@ actor {
   }
 
 };
+*/
